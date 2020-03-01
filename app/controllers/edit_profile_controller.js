@@ -31,7 +31,7 @@ exports.create=async(req,res)=>{
     }else{
         res.status(403).json({
             status: 403,
-            message: 'email does not exist...',
+            message: 'Email does not exist...',
         })
     }
 }else{
