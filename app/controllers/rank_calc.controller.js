@@ -19,7 +19,7 @@ if(!user_id) {
     let time_taken = await user_rank_form.find();
     //console.log('hi: '+time_taken)
     var users = time_taken.sort((a,b)=>{return parseFloat(a.timetaken) - parseFloat(b.timetaken)});
-    //console.log("hr: "+users);
+    console.log("hr: "+users);
      let newusers=[];
      let newusers_2=[];
     for (let i = 0; i < users.length; i++) {
@@ -31,20 +31,21 @@ if(!user_id) {
       }      
       console.log(newusers);
       for(let i=0;i<newusers.length;i++){
-         let name = await user_details.find({userid:newusers[i].userid});
-        for(let j=0;j<name.length;j++){
+         let name = await user_details.find({$or:[{userid:newusers[i].userid},{email:newusers[i].userid}]});
+         //console.log(name);
+         for(let j=0;j<name.length;j++){
             newusers_2.push({
-                userid:name[j].userid,
+                userid:newusers[i].userid,
                 name:name[j].first_name+' '+name[j].last_name,
                 rank:newusers[i].rank,
                 timetaken:newusers[i].timetaken
             })
-        }
+        } 
       }
-      console.log(newusers_2);
-      let count=1;
+       console.log(newusers_2);
+       let count=1;
       let newusers_3=[];
-      for(let i=0;i<newusers_2.length;i++){
+       for(let i=0;i<newusers_2.length;i++){
           if(req.body.userid==newusers_2[i].userid){
               console.log(count);
               if(count<=10){
@@ -80,14 +81,14 @@ if(!user_id) {
               }
           }
           count++;
-      }
-   /*  res.status(200).json({
+      } 
+  /*    res.status(200).json({
         status: 200,
-        // userid: req.body.userid, 
+        userid: req.body.userid, 
         // name: result_name,
         // rank: result_rank,
         // time_taken:result_timetaken, 
-        message: 'your rank  already registered...'
+        message: 'your rank  already registered...' 
     }) */
     
     
