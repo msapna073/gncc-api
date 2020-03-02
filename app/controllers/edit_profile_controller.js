@@ -25,7 +25,7 @@ exports.create=async(req,res)=>{
         let email_id=await  editprofile_form.updateOne({"userid":req.body.userid},{$set:{"emailid":req.body.email,"password":password,"address":req.body.address}});
         res.status(200).json({
             status: 200,
-            message: 'you have successfully registered...',
+            message: 'you have successfully updated your field..',
             data:email_id
         })
     }else{
@@ -37,7 +37,7 @@ exports.create=async(req,res)=>{
 }else{
     res.status(404).json({
         status: 404,
-        message: 'userid exist...',
+        message: 'userid does not exist...',
     })
 }
 }
