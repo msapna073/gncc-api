@@ -141,7 +141,9 @@ exports.login = async (req, res) => {
                  status: 200,
                  message: 'you have successfully logged in....',
                  userid: req.body.username,
-                 name: user.first_name+" "+user.last_name
+                 name: user.first_name+" "+user.last_name,
+                 email:user.email,
+                 login_type:"normal"
              })
              //return res.status(200).send('user and password match sucessfully');
             } else {
@@ -179,7 +181,8 @@ exports.facebook_login = async (req, res) => {
             status: 200,
             message: 'Logged in with Facbook....',
             userid: req.body.userid,
-            name:fb_user.first_name+" "+fb_user.last_name
+            name:fb_user.first_name+" "+fb_user.last_name,
+            login_type:"fb"
         })
         
         

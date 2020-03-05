@@ -13,7 +13,7 @@ exports.create=async(req,res)=>{
     let email_id = await editprofile_form.findOne({$or:[{email:req.body.userid},{userid:req.body.userid}]})
    console.log(email_id);
    if(email_id){
-     if(email_id.userid==''){
+     if(email_id.userid=='' ){
         let email_id=await  editprofile_form.updateOne({"email":req.body.userid},{$set:{"email":req.body.email,"password":password,"address":req.body.address}});
         res.status(200).json({
             status: 200,
@@ -22,7 +22,7 @@ exports.create=async(req,res)=>{
         })
     }else if(email_id.email==''){
         
-        let email_id=await  editprofile_form.updateOne({"userid":req.body.userid},{$set:{"emailid":req.body.email,"password":password,"address":req.body.address}});
+        let email_id=await  editprofile_form.updateOne({"userid":req.body.userid},{$set:{"emailid":req.body.email,"address":req.body.address}});
         res.status(200).json({
             status: 200,
             message: 'you have successfully updated your field..',

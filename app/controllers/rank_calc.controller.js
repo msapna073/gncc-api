@@ -28,6 +28,7 @@ if(!user_id) {
             timetaken:users[i].timetaken,
             rank:i+1
         })
+        
       }      
       console.log(newusers);
       for(let i=0;i<newusers.length;i++){
@@ -50,11 +51,13 @@ if(!user_id) {
               console.log(count);
               if(count<=10){
                   let ten_members=newusers_2.slice(0,10);
-                  console.log('yes: '+ten_members.length);
+                  console.log('yes: '+ten_members.length);   
                   res.status(200).json({
-                    status: 200,
+                    status: 200,  
                     data:ten_members,
-                    message: 'ten members'
+                    message: 'ten members',
+                    rank:newusers[i].rank
+                    
                 })
               }else{
                  
@@ -75,7 +78,8 @@ if(!user_id) {
                 res.status(200).json({
                     status: 200,
                     data:newusers_3,
-                    message: 'eleven members'
+                    message: 'eleven members',
+                    rank:"eleventh"
                 }) 
                   console.log('no'+count);
               }
