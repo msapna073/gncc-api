@@ -1,4 +1,5 @@
 const tour_registration_form = require('../models/tour_registration.model');
+const logger = require('../logger/logger.js')
 exports.tour_registration = async(req, res) =>  {
 
 
@@ -19,6 +20,7 @@ exports.tour_registration = async(req, res) =>  {
             status: 200,
             message: 'you have successfully registered...'
         })
+        logger.info(`you have successfully tou registered form... : ${JSON.stringify(req.body)}`)
 
     }
     if(user_id){
@@ -37,12 +39,16 @@ exports.tour_registration = async(req, res) =>  {
                 status: 403,
                 message: 'tourid already exists with the  userid'
             })
+            logger.info(`tourid already exists with the  userid : ${JSON.stringify(req.body.tourid)}`)
+            
         } else{
             var result = user_ride.save();
             res.status(200).json({
             status: 200,
             message: 'tour id registered with userid...'
         })
+        logger.info(`tour id registered with userid... : ${JSON.stringify(req.body.tourid)}`)
+            
         }
     }
         

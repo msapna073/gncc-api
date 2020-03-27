@@ -1,4 +1,5 @@
 const daily_rides= require('../models/daily_rides.model.js');
+const logger = require('../logger/logger.js')
 exports.dailyrides = async(req,res)=>{
     try{
 let dailyinformation = await daily_rides.find();
@@ -14,6 +15,7 @@ if(dailyinformation){
            })
         }
         console.log(data)
+        logger.info(`daily rides data: ${JSON.stringify(data)}`)
         res.status(200).json({
             status: 200,
             data:data
@@ -25,5 +27,6 @@ if(dailyinformation){
         message: e
     })
         console.log("error from daily rides information"+e);
+        logger.error(`error from daily rides information: ${JSON.stringify(e)}`)
     }
 }

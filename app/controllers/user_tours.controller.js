@@ -1,5 +1,6 @@
 const user_tour_information= require('../models/user_tours.model.js');
 const tour_details= require('../models/tour_registration.model.js');
+const logger = require('../logger/logger.js')
 exports.tours = async(req,res)=>{
     try{
 let usertourinformation = await user_tour_information.find();
@@ -30,7 +31,9 @@ if(usertourinformation || usertourdeatails){
         }
     }
     console.log(notpresent);
+    logger.info(`notpresnt: ${JSON.stringify(notpresent)}`)
     console.log(present)
+    logger.info(`present: ${JSON.stringify(present)}`)
     res.status(200).json({
         status: 200,
         present: present,
@@ -43,5 +46,6 @@ if(usertourinformation || usertourdeatails){
         message: e
     })
         console.log("error from user tour information"+e);
+        logger.error(`error from user tour information: ${JSON.stringify(e)}`)
     }
 }

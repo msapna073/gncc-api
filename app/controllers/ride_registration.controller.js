@@ -1,4 +1,5 @@
 const ride_registration_form = require('../models/ride_registrtation.model.js');
+const logger = require('../logger/logger.js')
 exports.ride_registration = async(req, res) =>  {
 
 
@@ -11,7 +12,8 @@ exports.ride_registration = async(req, res) =>  {
         leader:req.body.leader,
         leader_two:req.body.leader_two
      })
-     console.log("hello welcome to the ride")
+     logger.info(`ride registration_form : ${JSON.stringify(req.body )}`)
+     logger.info("welcome to the ride")
      let user_id = await ride_registration_form.findOne({ userid: req.body.userid });
     if(!user_id) {
         var result = user_ride.save();
@@ -19,6 +21,7 @@ exports.ride_registration = async(req, res) =>  {
             status: 200,
             message: 'you have successfully registered...'
         })
+        logger.info(`ride registration_form : ${JSON.stringify(req.body.userid )}`)
 
     }
     if(user_id){
@@ -38,6 +41,7 @@ exports.ride_registration = async(req, res) =>  {
                 status: 403,
                 message: 'rideid already exists with the  userid'
             })
+            logger.error(`rideid already exists with the  userid : ${JSON.stringify(req.body.rideid )}`)
         } else{
             var result = user_ride.save();
             res.status(200).json({

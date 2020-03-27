@@ -1,5 +1,6 @@
 const user_event_information= require('../models/user_events.model.js');
 const event_details= require('../models/event_registration.model.js');
+const logger = require('../logger/logger.js')
 exports.events = async(req,res)=>{
     try{
 let usereventinformation = await user_event_information.find();
@@ -33,7 +34,9 @@ if(usereventinformation || usereventdeatails){
         }
     }
     console.log(notpresent);
+    logger.info(`not present: ${JSON.stringify(notpresent)}`)
     console.log(present)
+    logger.info(`present ${JSON.stringify(present)}`)
     res.status(200).json({
         status: 200,
         present: present,
@@ -46,5 +49,6 @@ if(usereventinformation || usereventdeatails){
         message: e
     })
         console.log("error from user events information"+e);
+        logger.error(`error from user events information: ${JSON.stringify(e)}`)
     }
 }

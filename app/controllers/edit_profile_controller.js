@@ -1,4 +1,5 @@
 var editprofile_form= require('../models/user_registration.model');
+const logger = require('../logger/logger.js')
 var bcrypt=require('bcrypt');
 exports.create=async(req,res)=>{
  /*    const user = new editprofile_form({
@@ -20,6 +21,7 @@ exports.create=async(req,res)=>{
             message: 'you have successfully updated your field..',
             data:email_id
         })
+        logger.info(`you have successfully updated your field..${JSON.stringify(email_id)}`)
     }else if(email_id.email==''){
         
         let email_id=await  editprofile_form.updateOne({"userid":req.body.userid},{$set:{"emailid":req.body.email,"address":req.body.address}});
@@ -33,12 +35,16 @@ exports.create=async(req,res)=>{
             status: 403,
             message: 'Email does not exist...',
         })
+        logger.info(`Email does not exist...${JSON.stringify(email_id)}`)
+
     }
 }else{
     res.status(404).json({
         status: 404,
         message: 'userid does not exist...',
     })
+    logger.info(`userid does not exist...${JSON.stringify(email_id)}`)
+
 }
 }
 

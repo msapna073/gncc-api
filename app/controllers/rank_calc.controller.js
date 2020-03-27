@@ -1,5 +1,6 @@
 const user_rank_form= require('../models/rank_calc.model.js');
 const user_details= require('../models/user_registration.model.js')
+const logger = require('../logger/logger.js')
 exports.resources = async(req,res)=>{
 //   const user_rank = new user_rank_form({
 //    userid:req.body.userid,

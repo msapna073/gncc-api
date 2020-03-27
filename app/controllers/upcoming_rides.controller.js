@@ -1,4 +1,5 @@
 const upcoming_rides= require('../models/upcoming_rides.model.js');
+const logger = require('../logger/logger.js')
 exports.upcomingrides = async(req,res)=>{
     try{
 let upcomingridesinfo = await upcoming_rides.find();
@@ -25,5 +26,6 @@ if(upcomingridesinfo){
         message: e
     })
         console.log("error from upcoming rides information"+e);
+        logger.error(`error from upcoming rides information : ${JSON.stringify(e)}`)
     }
 }

@@ -1,4 +1,5 @@
 const user_registration_form = require('../models/user_registration.model.js');
+const logger = require('../logger/logger.js')
 const bcrypt = require('bcrypt');
 
 exports.create = async(req, res) => {
@@ -32,9 +33,12 @@ exports.create = async(req, res) => {
         console.log('email'+req.body.email);
         console.log('userid'+typeof(req.body.userid));
         console.log('emailid'+req.body.emailid);
+      
+
    if(req.body.email!='') {   
     let email_id = await user_registration_form.findOne({ email: req.body.email });
     if (email_id) {
+        logger.info(`email already exisits!: ${JSON.stringify(req.body.email)}`)
         res.status(403).json({
             status: 403,
             message: 'email already exisits!'
@@ -69,7 +73,9 @@ exports.create = async(req, res) => {
         longitude:req.body.longitude
             
         }); 
+
         user.save();
+        logger.info(`you have successfully registered: ${JSON.stringify(req.body)}`)
         res.status(200).json({
             status: 200,
             message: 'you have successfully registered...',
@@ -113,6 +119,7 @@ exports.create = async(req, res) => {
                 
             }); 
         user.save();
+        logger.info(`you have successfully registered: ${JSON.stringify(req.body)}`)
         res.status(200).json({
             status: 200,
             message: 'you have successfully registered...'
@@ -148,6 +155,7 @@ exports.login = async (req, res) => {
              })
              //return res.status(200).send('user and password match sucessfully');
             } else {
+            logger.error(`invalid password: ${JSON.stringify(req.body)}`)
              console.log("not match")
              res.status(403).json({
                 status: 403,
@@ -164,8 +172,9 @@ exports.login = async (req, res) => {
 
     }
     else{
-
+        logger.error(`login failed....: ${JSON.stringify(req.body)}`)
         res.status(404).json({
+            
             status: 404,
             message: 'login failed....'
         })
@@ -191,6 +200,8 @@ exports.facebook_login = async (req, res) => {
         
     }
     else{
+
+        logger.error(`Facebook Userid not exist: ${JSON.stringify(req.body)}`)
 
         res.status(404).json({
             status: 404,

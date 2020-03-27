@@ -2,6 +2,7 @@ const user_event_information= require('../models/event_registration.model');
 const user_tour_information= require('../models/tour_registration.model');
 const user_event= require('../models/user_events.model');
 const user_tour= require('../models/user_tours.model');
+const logger = require('../logger/logger.js')
 exports.ridescalender = async(req,res)=>{
     try{
 console.log(req.body.userid)
@@ -40,6 +41,7 @@ if((userevents.length>0 || usertours.length>0)){
      }
     } 
         console.log(data)
+        logger.info(`ride calender data: ${JSON.stringify(data)}`)
         res.status(200).json({
             status: 200,
             data:data
@@ -56,5 +58,6 @@ if((userevents.length>0 || usertours.length>0)){
         message: e
     })
         console.log("error from ride calender"+e);
+        logger.error(`error from ride calender: ${JSON.stringify(e)}`)
     }
 }
