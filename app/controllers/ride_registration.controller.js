@@ -24,18 +24,14 @@ exports.ride_registration = async(req, res) =>  {
     if(user_id){
         var arr_ride = []
         let ride_id = await ride_registration_form.find({"userid": req.body.userid},{rideid:1, _id: 0});
-        console.log(ride_id)
+       // console.log(ride_id)
         // var ride_id;
-        // for (let i = 0; i < ride_id.length; i++) {
-        //     const ride_value = ride_id[i].rideid;
-            // arr_ride.push(ride_value);
-            for (ride_id of arr_ride){
-                console.log(ride_id);
-            
-    
+         for (let i = 0; i < ride_id.length; i++) {
+            const ride_value = ride_id[i].rideid;
+            arr_ride.push(ride_value);
             
         }
-        
+        console.log(arr_ride)
     
         if (arr_ride.includes(req.body.rideid) === true) {    
             res.status(403).json({

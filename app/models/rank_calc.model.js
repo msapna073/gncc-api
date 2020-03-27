@@ -5,6 +5,5 @@ const RankSchema = mongoose.Schema({
     distance:Number,
     date:String,
     activityname:String
-  
     });
     module.exports=mongoose.model('rank_details',RankSchema)

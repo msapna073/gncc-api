@@ -4,7 +4,7 @@
   "description": "testing out nodejs with firebase",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +17,7 @@
     "express-basic-auth": "^1.2.0",
     "firebase": "^7.8.1",
     "firebase-admin": "^8.9.2",
-    "mongoose": "^5.7.3"
+    "mongoose": "^5.7.3",
+    "nodemon": "^2.0.2"
   }
 }
